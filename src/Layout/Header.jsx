@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 class Header extends React.Component {
     state = {
@@ -26,9 +27,12 @@ class Header extends React.Component {
             <header>
                 <nav className="navbar fixed-top" data-bs-theme="dark">
                     <div className=" container container-fluid">
-                        <a className="navbar-brand" href=".">
+                        <Link className="navbar-brand" to="/">
                             ЧТО ПОСМОТРЕТЬ
-                        </a>
+                        </Link>
+                        <Link className="navbar-brand" to="/about">
+                            About
+                        </Link>
                         <form className="d-flex" role="search">
                             <input
                                 className="form-control me-2"

@@ -19,6 +19,11 @@ header {
     margin-bottom: 100px;
 }
 
+.preloader{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .form-control, .form-control:focus{
     background: #141414;
 }

@@ -1,15 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Movies } from "../Components/Movies";
-import { Header } from "../Layout/Header";
 import { Preloader } from "../Layout/Preloader";
 
-class Main extends React.Component {
-    state = {
-        movies: [],
-        loading: true,
-    };
+export default function App(){
+    const [movies, setMovies] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    componentDidMount() {
+    useEffect ( () => {
         fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top`, {
             method: "GET",
             headers: {
@@ -18,11 +15,11 @@ class Main extends React.Component {
             },
         })
             .then((response) => response.json())
-            .then((data) => this.setState({ movies: data.films, loading: false }))
+            .then((data) => {setMovies(data.films); setLoading(false)})
             .catch((err) => {
                 console.error(err);
             });
-    }
+    }, [])
 
     searchMovies = (s) => {
         this.setState({ loading: true });
@@ -37,18 +34,14 @@ class Main extends React.Component {
             }
         )
             .then((response) => response.json())
-            .then((data) => this.setState({ movies: data.films, loading: false }))
+            .then((data) => {setMovies(data.films); setLoading(false)})
             .catch((err) => {
                 console.error(err);
             });
     };
 
-    render() {
-        const { movies, loading } = this.state;
-
         return (
             <>
-                <Header searchMovies={this.searchMovies} />
                 <main className="main-section">
                     {loading ? 
                     <Preloader />
@@ -57,7 +50,4 @@ class Main extends React.Component {
                 </main>
             </>
         );
-    }
 }
-
-export { Main };
